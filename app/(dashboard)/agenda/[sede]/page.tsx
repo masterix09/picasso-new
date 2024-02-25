@@ -33,19 +33,24 @@ export const dynamic = "force-dynamic";
 
 export default function Page({ params }: { params: { sede: string } }) {
   // const [view, setView] = useState<ECalendarView>(ECalendarView.WEEK_VIEW);
-  const { idPrestazioneAgenda, setIdPrestazioneAgenda } = useStore(
-    (state) => state
-  );
+  const {
+    idPrestazioneAgenda,
+    setIdPrestazioneAgenda,
+    setModalOpen,
+    setModalType,
+  } = useStore((state) => state);
 
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const { replace } = useRouter();
 
   const handleClick = (type: EModalType) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("modalOpen", "true");
-    params.set("modalType", type);
-    replace(`${pathname}?${params.toString()}`);
+    // const params = new URLSearchParams(searchParams);
+    // params.set("modalOpen", "true");
+    // params.set("modalType", type);
+    // replace(`${pathname}?${params.toString()}`);
+    setModalOpen(true);
+    setModalType(type);
   };
 
   const getColor = (

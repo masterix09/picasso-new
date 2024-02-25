@@ -71,7 +71,7 @@ export async function addPrestazionePianoCura (array: string[], idPiano: string,
             costoDefault: Number(item.costoDefault),
             pianoCuraId: idPiano,
             operatoreId: operatoreId,
-            denteId: idDente,
+            denteId: String(idDente),
             sedeId: sede ?? ""
         }
     })

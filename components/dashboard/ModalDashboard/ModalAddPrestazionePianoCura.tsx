@@ -36,6 +36,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EStatusStepper } from "@/enum/types";
 import AggiungiPrestazione from "./createPrestazione/AggiungiPrestazione";
 import AppuntamentoPrestazione from "./createPrestazione/AppuntamentoPrestazione";
+import { useStore } from "@/store/store";
 
 const formSchemaAddPrestazioni = z.object({
   sede: z.string().min(2),
@@ -68,9 +69,11 @@ const ModalAddPrestazionePianoCura = ({
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState("");
 
-  const searchParams = useSearchParams();
-  const idPiano = searchParams.get("idPiano");
-  const idDente = searchParams.get("dente");
+  // const searchParams = useSearchParams();
+  // const idPiano = searchParams.get("idPiano");
+  // const idDente = searchParams.get("dente");
+
+  const { idPiano, idDente } = useStore((state) => state);
 
   useEffect(() => {
     fetch("/api/getPrestazioniList/", {

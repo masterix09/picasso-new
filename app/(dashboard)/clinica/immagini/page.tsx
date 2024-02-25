@@ -33,13 +33,6 @@ export default function Page() {
   return (
     <div className="w-full">
       <div className="my-4">
-        {/* <Label>Aggiungi immagine</Label>
-        <Input
-          id="picture"
-          type="file"
-          className="w-fit mt-2"
-          onChange={() => handleFileChange}
-        /> */}
         {idPiano && (
           <CldUploadWidget
             uploadPreset="b59i7h4w"

@@ -14,13 +14,15 @@ import { EModalType } from "@/enum/types";
 export const dynamic = "force-dynamic";
 
 export default function Page() {
-  const { idPiano, setIdPrestazione } = useStore((state) => state);
+  const { idPiano, setIdPrestazione, setModalOpen, setModalType } = useStore(
+    (state) => state
+  );
 
   const [data, setData] = useState<TPrestazione[]>([]);
 
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const router = useRouter();
 
   useEffect(() => {
     if (idPiano) {
@@ -33,10 +35,12 @@ export default function Page() {
   }, [idPiano]);
 
   const handleClick = (type: EModalType) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("modalOpen", "true");
-    params.set("modalType", type);
-    router.replace(`${pathname}?${params.toString()}`);
+    // const params = new URLSearchParams(searchParams);
+    // params.set("modalOpen", "true");
+    // params.set("modalType", type);
+    // router.replace(`${pathname}?${params.toString()}`);
+    setModalOpen(true);
+    setModalType(type);
   };
 
   // This type is used to define the shape of our data.

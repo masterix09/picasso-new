@@ -17,17 +17,20 @@ export const dynamic = "force-dynamic";
 export default function Page() {
   const [data, setData] = useState<TSede[]>([]);
 
-  const { setIdSede } = useStore((state) => state);
+  const { setIdSede, setModalOpen, setModalType } = useStore((state) => state);
 
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const router = useRouter();
 
   const handleClick = (type: EModalType) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("modalOpen", "true");
-    params.set("modalType", type);
-    router.replace(`${pathname}?${params.toString()}`);
+    // const params = new URLSearchParams(searchParams);
+    // params.set("modalOpen", "true");
+    // params.set("modalType", type);
+    // router.replace(`${pathname}?${params.toString()}`);
+
+    setModalOpen(true);
+    setModalType(type);
   };
   const columns: ColumnDef<TSede>[] = [
     {

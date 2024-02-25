@@ -11,6 +11,7 @@ interface StateSchema {
   idDocumento: string,
   modalOpen: boolean,
   modalType: string,
+  idDente: string,
   setIdPiano: (id: string) => void
   setIdCliente: (id: string) => void
   setIdPrestazioneAgenda: (id: string) => void
@@ -20,6 +21,7 @@ interface StateSchema {
   setIdDocumento: (id: string) => void,
   setModalType: (id: EModalType) => void,
   setModalOpen: (id: boolean) => void,
+  setIdDente: (id: string) => void,
 }
 
 export const useStore = create<StateSchema>()((set) => ({
@@ -32,6 +34,7 @@ export const useStore = create<StateSchema>()((set) => ({
   idDocumento: "",
   modalOpen: false,
   modalType: "",
+  idDente: "",
   setIdPiano: (id) => set((state) => ({ idPiano: id, })),
   setIdCliente: (id) => set((state) => ({ idCliente: id, idPiano: "" })),
   setIdPrestazioneAgenda: (id) => set((state) => ({idPrestazioneAgenda: id})),
@@ -41,5 +44,6 @@ export const useStore = create<StateSchema>()((set) => ({
   setIdDocumento: (id) => set((state) => ({idDocumento: id})),
   setModalOpen: (id) => set((state) => ({modalOpen: id})),
   setModalType: (id) => set((state) => ({modalType: id})),
+  setIdDente: (id) => set((state) => ({idDente: id})), 
 }))
 

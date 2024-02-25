@@ -4,6 +4,7 @@ import React, { FC, useState } from "react";
 import styles from "@/style/gestionale/clinica/clinicaDenti.module.scss";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { EModalType } from "@/enum/types";
+import { useStore } from "@/store/store";
 // import { useDispatch } from "react-redux";
 // import { AppDispatch, useAppSelector } from "@/redux/store";
 // import { setModalOpen, setModalType } from "@/redux/features/common-slice";
@@ -35,16 +36,21 @@ const DentiTable = () => {
   //   };
 
   const [denteNumber, setDenteNumber] = useState<number>();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const { replace } = useRouter();
+
+  const { setModalOpen, setModalType, setIdDente } = useStore((state) => state);
 
   const openModal = (dente: number) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("modalOpen", "true");
-    params.set("modalType", EModalType.ADD_PRESTAZIONE_PIANOCURA);
-    params.set("dente", dente as unknown as string);
-    replace(`${pathname}?${params.toString()}`);
+    // const params = new URLSearchParams(searchParams);
+    // params.set("modalOpen", "true");
+    // params.set("modalType", EModalType.ADD_PRESTAZIONE_PIANOCURA);
+    // params.set("dente", dente as unknown as string);
+    // replace(`${pathname}?${params.toString()}`);
+    setModalOpen(true);
+    setModalType(EModalType.ADD_PRESTAZIONE_PIANOCURA);
+    setIdDente(dente as unknown as string);
   };
 
   return (

@@ -14,19 +14,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export const dynamic = "force-dynamic";
 
 export default function Page() {
-  // const searchParams = useSearchParams();
-  // const pathname = usePathname();
-  // const router = useRouter();
-
   const { idDocumento, setIdDocumento, setModalOpen, setModalType } = useStore(
     (state) => state
   );
 
   const handleClick = (type: EModalType) => {
-    // const params = new URLSearchParams(searchParams);
-    // params.set("modalOpen", "true");
-    // params.set("modalType", type);
-    // router.replace(`${pathname}?${params.toString()}`);
     setModalOpen(true);
     setModalType(type);
   };
