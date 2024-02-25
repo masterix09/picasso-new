@@ -19,7 +19,7 @@ const Uploader = ({ idPiano }: { idPiano: string }) => {
         url = results.info.url;
         console.log(url);
 
-        await createImage(url, idPiano);
+        // await createImage(url, idPiano);
       }}
     >
       {({ open }) => {
