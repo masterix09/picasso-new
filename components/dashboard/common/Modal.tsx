@@ -30,88 +30,98 @@ import ModalDeletePrestazione from "../ModalDashboard/prestazioni/ModalDeletePre
 import ModalDeleteSede from "../ModalDashboard/sede/ModalDeleteSede";
 import ModalEliminaOperatore from "../ModalDashboard/operatore/ModalEliminaOperatore";
 import ModalDeleteDocumento from "../ModalDashboard/documento/ModalDeleteDocumento";
+import { useStore } from "@/store/store";
 
 const Modal = () => {
-  const searchParams = useSearchParams();
-  const open = searchParams.get("modalOpen");
-  const type = searchParams.get("modalType");
-  const idCliente = searchParams.get("idCliente");
-  const idPiano = searchParams.get("idPiano");
+  // const searchParams = useSearchParams();
+  // const open = searchParams.get("modalOpen");
+  // const type = searchParams.get("modalType");
+  // const idCliente = searchParams.get("idCliente");
+  // const idPiano = searchParams.get("idPiano");
 
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  // const pathname = usePathname();
+  // const { replace } = useRouter();
+
+  const {
+    modalOpen,
+    modalType,
+    setModalOpen,
+    setModalType,
+    idCliente,
+    idPiano,
+  } = useStore((state) => state);
 
   const handleCloseModal = () => {
-    const params = new URLSearchParams(searchParams);
-    params.delete("modalOpen");
-    params.delete("modalType");
-
-    replace(`${pathname}?${params.toString()}`);
+    // const params = new URLSearchParams(searchParams);
+    // params.delete("modalOpen");
+    // params.delete("modalType");
+    // replace(`${pathname}?${params.toString()}`);
+    setModalOpen(false);
   };
 
   return (
-    <AlertDialog open={(open as unknown as boolean) ?? false}>
-      {type === EModalType.ADD_PRESTAZIONE_PIANOCURA && (
+    <AlertDialog open={(modalOpen as unknown as boolean) ?? false}>
+      {modalType === EModalType.ADD_PRESTAZIONE_PIANOCURA && (
         <ModalAddPrestazionePianoCura handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.CREATE_PRESTAZIONE && (
+      {modalType === EModalType.CREATE_PRESTAZIONE && (
         <ModalCreatePrestazione handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.CREATE_OPERATORE && (
+      {modalType === EModalType.CREATE_OPERATORE && (
         <ModalCreateOperatore handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.CREATE_SEDE && (
+      {modalType === EModalType.CREATE_SEDE && (
         <ModalCreateSede handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.CREATE_PIANO_CURA && (
+      {modalType === EModalType.CREATE_PIANO_CURA && (
         <ModalCreatePianoCura
           idCliente={idCliente}
           handleCloseModal={handleCloseModal}
         />
       )}
-      {type === EModalType.CREATE_PAZIENTE && (
+      {modalType === EModalType.CREATE_PAZIENTE && (
         <ModalCreatePaziente handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.CREATE_DOCUMENTO && (
+      {modalType === EModalType.CREATE_DOCUMENTO && (
         <CreateDocumento handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.CREATE_PAGAMENTO && (
+      {modalType === EModalType.CREATE_PAGAMENTO && (
         <ModalCreatePagamento
           handleCloseModal={handleCloseModal}
           idPiano={idPiano}
         />
       )}
-      {type === EModalType.DETTAGLIO_EVENTO && (
+      {modalType === EModalType.DETTAGLIO_EVENTO && (
         <ModalDettaglio handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.ORA_ARRIVO && (
+      {modalType === EModalType.ORA_ARRIVO && (
         <ModalArrivo handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.ORA_USCITA && (
+      {modalType === EModalType.ORA_USCITA && (
         <ModalUscita handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.ELIMINA_PRESTAZIONE_PIANOCURA && (
+      {modalType === EModalType.ELIMINA_PRESTAZIONE_PIANOCURA && (
         <ModalDeletePrestazionePianoCura handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.IMPOSTA_DATA_APPUNTAMENTO && (
+      {modalType === EModalType.IMPOSTA_DATA_APPUNTAMENTO && (
         <ModalDataAppuntamento handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.IMPOSTA_ORARIO_APPUNTAMENTO && (
+      {modalType === EModalType.IMPOSTA_ORARIO_APPUNTAMENTO && (
         <ModalImpostaOrario handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.MODIFICA_OPERATORE && (
+      {modalType === EModalType.MODIFICA_OPERATORE && (
         <ModalCreateOperatore handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.ELIMINA_OPERATORE && (
+      {modalType === EModalType.ELIMINA_OPERATORE && (
         <ModalEliminaOperatore handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.ELIMINA_PRESTAZIONE && (
+      {modalType === EModalType.ELIMINA_PRESTAZIONE && (
         <ModalDeletePrestazione handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.ELIMINA_SEDE && (
+      {modalType === EModalType.ELIMINA_SEDE && (
         <ModalDeleteSede handleCloseModal={handleCloseModal} />
       )}
-      {type === EModalType.ELIMINA_DOCUMENTO && (
+      {modalType === EModalType.ELIMINA_DOCUMENTO && (
         <ModalDeleteDocumento handleCloseModal={handleCloseModal} />
       )}
     </AlertDialog>

@@ -8,7 +8,7 @@ export async function GET(
 ) {
 //   const id = params.id;
   const data = await db.cliente.findMany()
-  
+  console.log(data)
 
     // const data = getPazienti();
 

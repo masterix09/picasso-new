@@ -12,6 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
   const [data, setData] = useState<{ url: string }[]>([]);
   const { idPiano } = useStore((state) => state);

@@ -11,6 +11,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { EModalType } from "@/enum/types";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
   const { idPiano, setIdPrestazione } = useStore((state) => state);
 

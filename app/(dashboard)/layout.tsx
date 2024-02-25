@@ -1,8 +1,10 @@
+"use client";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import Modal from "@/components/dashboard/common/Modal";
 import { Provider } from "@/components/dashboard/common/Provider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -12,6 +12,8 @@ import { useStore } from "@/store/store";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getSede } from "@/actions/actions.clinica";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
   const [data, setData] = useState<TSede[]>([]);
 

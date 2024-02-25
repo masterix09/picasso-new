@@ -2,10 +2,11 @@ import React, { FC } from "react";
 import { Document, Page, StyleSheet, View } from "@react-pdf/renderer";
 import Paragraph from "../common/Paragraph";
 import ParagraphText from "../common/ParagraphText";
-import { SmartTAGPropsDocument } from "@/app/utils/type/type";
+
 import ParagraphList from "../common/ParagraphList";
 import Footer from "../common/Footer";
 import Header from "../common/Header";
+import { SmartTAGPropsDocument } from "@/types";
 
 const styles = StyleSheet.create({
   page: {

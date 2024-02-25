@@ -11,18 +11,24 @@ import { useEffect, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
+export const dynamic = "force-dynamic";
 
-  const { idDocumento, setIdDocumento } = useStore((state) => state);
+export default function Page() {
+  // const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const router = useRouter();
+
+  const { idDocumento, setIdDocumento, setModalOpen, setModalType } = useStore(
+    (state) => state
+  );
 
   const handleClick = (type: EModalType) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("modalOpen", "true");
-    params.set("modalType", type);
-    router.replace(`${pathname}?${params.toString()}`);
+    // const params = new URLSearchParams(searchParams);
+    // params.set("modalOpen", "true");
+    // params.set("modalType", type);
+    // router.replace(`${pathname}?${params.toString()}`);
+    setModalOpen(true);
+    setModalType(type);
   };
 
   const columns: ColumnDef<TDocument>[] = [

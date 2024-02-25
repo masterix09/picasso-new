@@ -26,6 +26,8 @@ import {
   getPrestazioniByIdPiano,
 } from "@/actions/actions.clinica";
 
+export const dynamic = "force-dynamic";
+
 export default function Page({
   searchParams,
 }: {

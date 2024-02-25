@@ -12,6 +12,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useStore } from "@/store/store";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
   const [data, setData] = useState<TOperatore[]>([]);
 

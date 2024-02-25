@@ -140,3 +140,8 @@ export type SmartTAGPropsDocument = {
   Benefici: string;
   Rischi: string;
 };
+
+export enum EListino {
+  GENTILE = "GENTILE",
+  DEFAULT = "DEFAULT"
+}

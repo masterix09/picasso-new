@@ -4,10 +4,11 @@ import { StyleSheet } from "@react-pdf/renderer";
 import Header from "../common/Header";
 import Footer from "../common/Footer";
 import ParagraphText from "../common/ParagraphText";
-import moment from "moment";
+// import moment from "moment";
 import Paragraph from "../common/Paragraph";
-import { IPagamento, IPrestazione } from "@/app/utils/type/type";
-import { EListino } from "@/app/models/enums";
+import { IPagamento, IPrestazione } from "@/types";
+import { EListino } from "@/enum/types";
+import { format } from "date-fns";
 
 const styles = StyleSheet.create({
   page: {
@@ -99,9 +100,10 @@ const ResocontoPagamento: FC<{
       <Page size="A4" style={styles.page}>
         <Header />
         <Paragraph
-          title={`Preventivo del ${moment(pianoCuraCreationDate).format(
-            "DD MMM YYYY"
-          )}`}
+          // title={`Preventivo del ${moment(pianoCuraCreationDate).format(
+          //   "DD MMM YYYY"
+          // )}`}
+          title={`Preventivo del ${format(new Date(), "dd MM yyyy")}`}
         >
           <View style={styles.table}>
             <View style={styles.tableRow}>
@@ -126,7 +128,7 @@ const ResocontoPagamento: FC<{
                   </View>
                   <View style={styles.tableCol}>
                     <Text style={styles.tableCell}>
-                      {listino === EListino.Default
+                      {listino === EListino.DEFAULT
                         ? item.costoDefault
                         : item.costoGentile}{" "}
                       €
@@ -141,7 +143,8 @@ const ResocontoPagamento: FC<{
           </View>
         </Paragraph>
         <Paragraph
-          title={`Dettaglio pagamenti al ${moment().format("DD/MM/YYYY")}`}
+          // title={`Dettaglio pagamenti al ${moment().format("DD/MM/YYYY")}`}
+          title={`Dettaglio pagamenti al ${format(new Date(), "dd/MM/yyyy")}`}
         >
           <View style={styles.table}>
             <View style={styles.tableRow}>

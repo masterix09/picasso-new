@@ -11,6 +11,8 @@ import { useStore } from "@/store/store";
 import { getPrestazioniList } from "@/actions/actions.clinica";
 import { Button } from "@/components/ui/button";
 
+export const dynamic = "force-dynamic";
+
 export type TPrestazioneLista = {
   id: string;
   nome: string | null;

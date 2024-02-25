@@ -18,7 +18,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 
 export default function ClinicaLayout({ children }: { children: ReactNode }) {
   const [valuePaziente, setValuePaziente] = useState<string>("");
