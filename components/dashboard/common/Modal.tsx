@@ -31,6 +31,7 @@ import ModalDeleteSede from "../ModalDashboard/sede/ModalDeleteSede";
 import ModalEliminaOperatore from "../ModalDashboard/operatore/ModalEliminaOperatore";
 import ModalDeleteDocumento from "../ModalDashboard/documento/ModalDeleteDocumento";
 import { useStore } from "@/store/store";
+import ModalModificaSede from "../ModalDashboard/sede/ModalModificaSede";
 
 const Modal = () => {
   // const searchParams = useSearchParams();
@@ -123,6 +124,9 @@ const Modal = () => {
       )}
       {modalType === EModalType.ELIMINA_DOCUMENTO && (
         <ModalDeleteDocumento handleCloseModal={handleCloseModal} />
+      )}
+      {modalType === EModalType.MODIFICA_SEDE && (
+        <ModalModificaSede handleCloseModal={handleCloseModal} />
       )}
     </AlertDialog>
   );

@@ -446,3 +446,24 @@ export async function deleteDocumentoById (idDocumento: string) {
     })
 }
 
+
+export async function getSedeById (idSede : string) {
+    return await db.sede.findFirst({
+        where: {
+            id: idSede
+        }
+    })
+}
+
+
+export async function updateSede (idSedeVecchio: string, idSedeNuovo: string) {
+    await db.sede.update({
+        where: {
+            id: idSedeVecchio,
+        },
+        data: {
+            nome: idSedeNuovo,
+            id: idSedeNuovo
+        }
+    })
+}

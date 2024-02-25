@@ -57,7 +57,7 @@ export default function Page() {
               type="button"
               onClick={() => {
                 setIdSede(row.original.id);
-                handleClick(EModalType.MODIFICA_PRESTAZIONE);
+                handleClick(EModalType.MODIFICA_SEDE);
               }}
             >
               Modifica
