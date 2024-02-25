@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { EModalType } from "@/enum/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import { getOperatore } from "@/actions/actions.clinica";
+import { getOperatore, getOperatoreById } from "@/actions/actions.clinica";
 import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 export default function Page() {
   const [data, setData] = useState<TOperatore[]>([]);
 
-  const { idOperatore, setIdOperatore, setModalOpen, setModalType } = useStore(
+  const { setIdOperatore, setModalOpen, setModalType } = useStore(
     (state) => state
   );
 
@@ -69,7 +69,7 @@ export default function Page() {
             </Button>
             <Button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 setIdOperatore(row.original.id);
                 handleClick(EModalType.MODIFICA_OPERATORE);
               }}

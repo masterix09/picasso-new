@@ -32,6 +32,8 @@ import ModalEliminaOperatore from "../ModalDashboard/operatore/ModalEliminaOpera
 import ModalDeleteDocumento from "../ModalDashboard/documento/ModalDeleteDocumento";
 import { useStore } from "@/store/store";
 import ModalModificaSede from "../ModalDashboard/sede/ModalModificaSede";
+import ModalModificaOperatore from "../ModalDashboard/operatore/ModalModificaOperatore";
+import ModalModificaPrestazione from "../ModalDashboard/prestazioni/ModalModificaPrestazione";
 
 const Modal = () => {
   // const searchParams = useSearchParams();
@@ -110,9 +112,6 @@ const Modal = () => {
       {modalType === EModalType.IMPOSTA_ORARIO_APPUNTAMENTO && (
         <ModalImpostaOrario handleCloseModal={handleCloseModal} />
       )}
-      {modalType === EModalType.MODIFICA_OPERATORE && (
-        <ModalCreateOperatore handleCloseModal={handleCloseModal} />
-      )}
       {modalType === EModalType.ELIMINA_OPERATORE && (
         <ModalEliminaOperatore handleCloseModal={handleCloseModal} />
       )}
@@ -127,6 +126,12 @@ const Modal = () => {
       )}
       {modalType === EModalType.MODIFICA_SEDE && (
         <ModalModificaSede handleCloseModal={handleCloseModal} />
+      )}
+      {modalType === EModalType.MODIFICA_OPERATORE && (
+        <ModalModificaOperatore handleCloseModal={handleCloseModal} />
+      )}
+      {modalType === EModalType.MODIFICA_PRESTAZIONE && (
+        <ModalModificaPrestazione handleCloseModal={handleCloseModal} />
       )}
     </AlertDialog>
   );

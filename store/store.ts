@@ -1,4 +1,5 @@
 import { EModalType } from '@/enum/types'
+import { object } from 'zod'
 import { create } from 'zustand'
 
 interface StateSchema {
@@ -12,6 +13,7 @@ interface StateSchema {
   modalOpen: boolean,
   modalType: string,
   idDente: string,
+  defaultValues: object,
   setIdPiano: (id: string) => void
   setIdCliente: (id: string) => void
   setIdPrestazioneAgenda: (id: string) => void
@@ -22,6 +24,7 @@ interface StateSchema {
   setModalType: (id: EModalType) => void,
   setModalOpen: (id: boolean) => void,
   setIdDente: (id: string) => void,
+  setDefaultValues: (values: object) => void,
 }
 
 export const useStore = create<StateSchema>()((set) => ({
@@ -35,6 +38,7 @@ export const useStore = create<StateSchema>()((set) => ({
   modalOpen: false,
   modalType: "",
   idDente: "",
+  defaultValues: {},
   setIdPiano: (id) => set((state) => ({ idPiano: id, })),
   setIdCliente: (id) => set((state) => ({ idCliente: id, idPiano: "" })),
   setIdPrestazioneAgenda: (id) => set((state) => ({idPrestazioneAgenda: id})),
@@ -44,6 +48,7 @@ export const useStore = create<StateSchema>()((set) => ({
   setIdDocumento: (id) => set((state) => ({idDocumento: id})),
   setModalOpen: (id) => set((state) => ({modalOpen: id})),
   setModalType: (id) => set((state) => ({modalType: id})),
-  setIdDente: (id) => set((state) => ({idDente: id})), 
+  setIdDente: (id) => set((state) => ({idDente: id})),
+  setDefaultValues: (value) => set((state) => ({defaultValues: value}))
 }))
 

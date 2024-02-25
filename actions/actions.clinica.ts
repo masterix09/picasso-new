@@ -390,13 +390,9 @@ export async function deleteOperatoreById (idOperatore: string) {
 }
 
 export async function getOperatoreById (idOperatore: string) {
-    // return await db.operatore.findFirst({
-    //     where: {
-    //         id: idOperatore
-    //     }
-    // })
+    
 
-    return await db.operatoreOnSede.findFirst({
+    const data =  await db.operatoreOnSede.findMany({
         where: {
             operatoreId: idOperatore,
         },
@@ -412,11 +408,24 @@ export async function getOperatoreById (idOperatore: string) {
             },
             sede: {
                 select: {
-                    nome: true
+                    nome: true,
                 }
-            }
+            },
         }
     })
+
+    const arraySede: string[] = data.map((item) => {
+        return item.sede.nome
+    })
+
+    console.log("arraySede => ", arraySede)
+
+    return {
+        nome: data.at(0)?.operatore.nome ?? "",
+        cognome: data.at(0)?.operatore.cognome ?? "",
+        colore: data.at(0)?.operatore.colorAgenda ?? "",
+        sede: arraySede ?? []
+    }
 }
 
 
@@ -464,6 +473,53 @@ export async function updateSede (idSedeVecchio: string, idSedeNuovo: string) {
         data: {
             nome: idSedeNuovo,
             id: idSedeNuovo
+        }
+    })
+}
+
+export async function updateOperatoreById (idOperatore: string, nome: string, cognome: string, colore: string) {
+
+   await db.operatore.update({
+    where: {
+        id: idOperatore
+    },
+    data: {
+        cognome,
+        nome,
+        colorAgenda: colore
+    }
+   })
+
+   revalidatePath("/operatoriLista")
+}
+
+
+export async function getPrestzioneListaById (idPrestazione: string) {
+    return await db.prestazioniLista.findFirst({
+        where: {
+            id: idPrestazione
+        },
+        select: {
+            categoria: true,
+            costoDefault:true,
+            costoGentile: true,
+            nome: true,
+            forWho: true
+        }
+    })
+}
+
+export async function updatePrestazioneLista (idPrestazione: string, categoria: string, nome: string, costoDefault: number, costoGentile: number, forWho: string) {
+    await db.prestazioniLista.update({
+        where: {
+            id: idPrestazione
+        },
+        data: {
+            categoria,
+            costoDefault,
+            costoGentile,
+            forWho,
+            nome
         }
     })
 }
