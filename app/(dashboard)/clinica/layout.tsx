@@ -91,14 +91,18 @@ export default function ClinicaLayout({ children }: { children: ReactNode }) {
               width={50}
               height={50}
             />
-            <div>
-              <h6 className="font-semibold">Andrea Verde</h6>
-            </div>
+            {valuePaziente && (
+              <div>
+                <h6 className="font-semibold">{getNomeCognome()}</h6>
+              </div>
+            )}
           </div>
           <div className="py-3 border-t-2 border-b-2 border-t-gray-400 border-b-gray-400 flex justify-between my-2">
-            <h6 className="text-gray-400 text-sm">
-              CF: <span className="text-black font-bold">{getCF()}</span>
-            </h6>
+            {valuePaziente && (
+              <h6 className="text-gray-400 text-sm">
+                CF: <span className="text-black font-bold">{getCF()}</span>
+              </h6>
+            )}
             {/* <h6 className="text-gray-400 text-sm">
               ETA: <span className="text-black font-bold">24</span>
             </h6> */}
