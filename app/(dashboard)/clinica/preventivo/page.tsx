@@ -16,37 +16,39 @@ import {
 } from "./columns";
 import { DataTable } from "./data-table";
 import ButtonModal from "@/components/dashboard/common/ButtonModal";
-import { EModalType } from "@/enum/types";
+import { EListino, EModalType } from "@/enum/types";
 import { db } from "@/lib/db";
 import SelectListino from "@/components/dashboard/PianoDiCura/preventivo/SelectListino";
 import { useStore } from "@/store/store";
 import { useEffect, useState } from "react";
 import {
   getPagamentiByIdPiano,
+  getPianoCuraCreatedDate,
   getPrestazioniByIdPiano,
 } from "@/actions/actions.clinica";
+import { format } from "date-fns";
 
 export const dynamic = "force-dynamic";
 
-export default function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | undefined };
-}) {
-  const { idPiano } = useStore((state) => state);
+export default function Page() {
+  const { idPiano, listino, setListino } = useStore((state) => state);
   const [data, setData] = useState<TPrestazionePreventivo[]>([]);
   const [pagamenti, setPagamenti] = useState<TPagamentiPreventivo[]>([]);
+  const [pianoCreatedAt, setPianoCreatedAt] = useState<{
+    createdAt: Date | null;
+  } | null>();
 
   useEffect(() => {
     if (idPiano) {
       getPrestazioniByIdPiano(idPiano).then((data) => setData(data));
       getPagamentiByIdPiano(idPiano).then((data) => setPagamenti(data));
+      getPianoCuraCreatedDate(idPiano).then((data) => setPianoCreatedAt(data));
     }
   }, [idPiano]);
 
   const calculateTotale = () => {
     let costo: number = 0;
-    if (searchParams.listino === "gentile") {
+    if (listino === EListino.GENTILE) {
       data.map((item) => (costo = costo + (item.costoGentile ?? 0)));
     } else {
       data.map((item) => (costo = costo + (item.costoDefault ?? 0)));
@@ -59,7 +61,9 @@ export default function Page({
       <div className="w-full flex flex-col md:flex-row border-2  shadow-lg">
         <div className="border-b-2 md:border-b-0 md:border-r-2 border-b-gray-900 p-3 w-full">
           <p className="text-md text-gray-500">Data preventivo</p>
-          <p className="text-xl font-bold text-black">31/01/2024</p>
+          <p className="text-xl font-bold text-black">
+            {format(pianoCreatedAt?.createdAt ?? new Date(), "dd/MM/yyyy")}
+          </p>
         </div>
         <div className="border-b-2 md:border-b-0 md:border-r-2 border-b-gray-900  p-3 w-full">
           <p className="text-md text-gray-500">Listino</p>
@@ -75,9 +79,7 @@ export default function Page({
       </div>
 
       <DataTable
-        columns={
-          searchParams.listino === "gentile" ? columnsGentile : columnsDefault
-        }
+        columns={listino === EListino.GENTILE ? columnsGentile : columnsDefault}
         data={data}
       />
 

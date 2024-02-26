@@ -36,7 +36,8 @@ export async function createPianoCura (titolo: string, clienteId: string) {
         data: {
             titolo,
             id: uuidv4(),
-            clienteId: clienteId
+        clienteId: clienteId,
+           
         }
     })
 
@@ -520,6 +521,18 @@ export async function updatePrestazioneLista (idPrestazione: string, categoria: 
             costoGentile,
             forWho,
             nome
+        }
+    })
+}
+
+export async function getPianoCuraCreatedDate (idPianoCura: string) {
+
+    return await db.pianoCura.findFirst({
+        where: {
+            id: idPianoCura,
+        },
+        select: {
+            createdAt: true
         }
     })
 }

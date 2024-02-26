@@ -23,6 +23,7 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
+import { DayPicker } from "react-day-picker";
 
 const ModalDataAppuntamento = ({
   handleCloseModal,
@@ -52,12 +53,17 @@ const ModalDataAppuntamento = ({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            initialFocus
-          />
+          <div className="w-full relative p-0 m-0">
+            <DayPicker
+              captionLayout="dropdown-buttons"
+              fromYear={1926}
+              toYear={2060}
+              className="w-fit"
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+            />
+          </div>
         </PopoverContent>
       </Popover>
 

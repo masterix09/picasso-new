@@ -27,6 +27,7 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { createPagamento } from "@/actions/actions.clinica";
+import { DayPicker } from "react-day-picker";
 
 const formSchema = z.object({
   data: z.date({
@@ -90,15 +91,20 @@ const ModalCreatePagamento = ({
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) => date < new Date("1900-01-01")}
-                      initialFocus
-                    />
+                    <div className="w-full relative p-0 m-0">
+                      <DayPicker
+                        captionLayout="dropdown-buttons"
+                        fromYear={1926}
+                        toYear={2060}
+                        className="w-fit"
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                      />
+                    </div>
                   </PopoverContent>
                 </Popover>
+
                 <FormMessage />
               </FormItem>
             )}
