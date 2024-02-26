@@ -31,6 +31,11 @@ export default function ClinicaLayout({ children }: { children: ReactNode }) {
     return `${find?.cognome} ${find?.nome}`;
   };
 
+  const getCF = () => {
+    const find = users?.find((framework) => framework.id === valuePaziente);
+    return `${find?.codice_fiscale}`;
+  };
+
   const getNomePianoCura = () => {
     const find = pianoCura?.find(
       (framework) => framework.id === valuePinaoCura
@@ -88,16 +93,15 @@ export default function ClinicaLayout({ children }: { children: ReactNode }) {
             />
             <div>
               <h6 className="font-semibold">Andrea Verde</h6>
-              <h6 className="text-xs">VRDNDR99R06F839Q</h6>
             </div>
           </div>
           <div className="py-3 border-t-2 border-b-2 border-t-gray-400 border-b-gray-400 flex justify-between my-2">
             <h6 className="text-gray-400 text-sm">
-              COD. PAZ. <span className="text-black font-bold">123</span>
+              CF: <span className="text-black font-bold">{getCF()}</span>
             </h6>
-            <h6 className="text-gray-400 text-sm">
+            {/* <h6 className="text-gray-400 text-sm">
               ETA: <span className="text-black font-bold">24</span>
-            </h6>
+            </h6> */}
           </div>
           {valuePaziente !== "" && (
             <div className="flex gap-4 items-center">
