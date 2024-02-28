@@ -11,7 +11,7 @@ import { json } from "stream/consumers";
 import { v4 as uuidv4 } from 'uuid';
 
 export async function getPazienti () {
-    return db.cliente.findMany()
+    return await db.cliente.findMany()
 }
 
 export async function getPrestazioniAgenda() {
@@ -535,4 +535,14 @@ export async function getPianoCuraCreatedDate (idPianoCura: string) {
             createdAt: true
         }
     })
+}
+
+
+
+export async function getPianoCuraByIdCliente (idCliente: string) {
+    return await db.pianoCura.findMany({
+        where: {
+          clienteId: idCliente
+        },
+      })
 }

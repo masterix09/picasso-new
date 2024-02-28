@@ -1,4 +1,8 @@
 "use client";
+import {
+  getPazienti,
+  getPianoCuraByIdCliente,
+} from "@/actions/actions.clinica";
 import NavbarClinica from "@/components/dashboard/NavbarClinica";
 import SearchInput from "@/components/dashboard/SearchInput";
 import ButtonModal from "@/components/dashboard/common/ButtonModal";
@@ -26,7 +30,15 @@ export default function ClinicaLayout({ children }: { children: ReactNode }) {
   const [valuePaziente, setValuePaziente] = useState<string>("");
   const [valuePinaoCura, setValuePianoCura] = useState<string>("");
   const [users, setUsers] = useState<IPaziente[]>([]);
-  const [pianoCura, setPianoCura] = useState<IPianoCura[]>([]);
+  const [pianoCura, setPianoCura] = useState<
+    {
+      id: string;
+      titolo: string | null;
+      createdAt: Date | null;
+      preventivoId: string | null;
+      clienteId: string;
+    }[]
+  >([]);
 
   const getNomeCognome = () => {
     const find = users?.find((framework) => framework.id === valuePaziente);
@@ -46,20 +58,12 @@ export default function ClinicaLayout({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    fetch("/api/getPazienti", {
-      method: "GET",
-    })
-      .then((data) => data.json())
-      .then((data) => setUsers(data));
+    getPazienti().then((data) => setUsers(data));
   }, []);
 
   useEffect(() => {
     if (valuePaziente !== "") {
-      fetch(`/api/getPianoCura/${valuePaziente}`, {
-        method: "GET",
-      })
-        .then((data) => data.json())
-        .then((data) => setPianoCura(data));
+      getPianoCuraByIdCliente(valuePaziente).then((data) => setPianoCura(data));
     }
   }, [users, valuePaziente]);
 
