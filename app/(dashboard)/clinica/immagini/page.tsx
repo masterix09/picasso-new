@@ -1,6 +1,6 @@
 "use client";
 import { CldUploadWidget } from "next-cloudinary";
-import { createImage } from "@/actions/actions.clinica";
+import { createImage, getImageByIdPiano } from "@/actions/actions.clinica";
 import { useSearchParams } from "next/navigation";
 import { useStore } from "@/store/store";
 import {
@@ -20,11 +20,7 @@ export default function Page() {
 
   useEffect(() => {
     if (idPiano) {
-      fetch(`/api/getImageByPiano/${idPiano}`, {
-        method: "GET",
-      })
-        .then((data) => data.json())
-        .then((data) => setData(data));
+      getImageByIdPiano(idPiano).then((data) => setData(data));
     }
   }, [idPiano]);
 

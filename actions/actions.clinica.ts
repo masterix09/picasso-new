@@ -546,3 +546,15 @@ export async function getPianoCuraByIdCliente (idCliente: string) {
         },
       })
 }
+
+export async function getImageByIdPiano (idPiano: string) {
+    return await await db.image.findMany({
+        where: {
+         pianoCuraId: idPiano
+        },
+        select: {
+         url: true
+        }
+       });
+}
+
