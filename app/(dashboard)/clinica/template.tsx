@@ -20,6 +20,8 @@ import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ReactNode, Suspense, useEffect, useState } from "react";
 
+export const dynamic = "force-dynamic";
+
 export default function ClinicaLayout({ children }: { children: ReactNode }) {
   const [valuePaziente, setValuePaziente] = useState<string>("");
   const [valuePinaoCura, setValuePianoCura] = useState<string>("");
