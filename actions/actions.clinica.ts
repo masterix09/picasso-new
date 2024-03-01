@@ -575,3 +575,116 @@ export async function updateStatusPrestazione (idPrestazione: string, status: st
         }
     })
 }
+
+
+export async function getAnamnesiById (idPaziente: string) {
+    return await db.cliente.findFirst({
+        where: {
+            id: idPaziente
+        },
+        select: {
+            AffezioniCardiache: true,
+            AffezioniRenali: true,
+            Affezionireumatiche: true,
+            AlterazionePressioneSanguigna: true,
+            Altro: true,
+            AsmaOAltro: true,
+            AssumeFarmaci: true,
+            Bruxista: true,
+            Copnseguenze: true,
+            Diabete: true,
+            Ematomi: true,
+            Emorragie: true,
+            EsamiOTerapia: true,
+            FacilmenteInfezioni: true,
+            Fumatore: true,
+            GiaSubitoAnestesia: true,
+            Gravidanza: true,
+            HaSoffertoSoffreMalattieInfettive: true,
+            IpersensibilitaVersoFarmaci: true,
+            MalattiePsichiche: true,
+            nomeDentista: true,
+            nomeMedico: true,
+            numeroDentista: true,
+            note: true,
+            numeroMedico: true,
+            PatologieApparatoDigerente: true,
+            PatologieGenitoUrinarie: true,
+            PatologieOculari: true,
+            PatologieSangue: true,
+            PatologieSistemaNervoso: true,
+            Profilassi: true,
+            RicoveriOMalattie: true,
+            TerapiaAnticoagulanti: true,
+            Ulcere: true,
+        }
+    })
+}
+
+export async function updateAnamnesi (idPaziente: string, AffezioniCardiache: boolean | null,
+    AffezioniRenali: boolean | null,
+    Affezionireumatiche: boolean | null,
+    AlterazionePressioneSanguigna: boolean | null,
+    Altro: boolean | null,
+    AsmaOAltro: boolean | null,
+    AssumeFarmaci: boolean | null,
+    Bruxista: boolean | null,
+    Copnseguenze: boolean | null,
+    Diabete: boolean | null,
+    Ematomi: boolean | null,
+    Emorragie: boolean | null,
+    EsamiOTerapia: boolean | null,
+    FacilmenteInfezioni: boolean | null,
+    Fumatore: boolean | null,
+    GiaSubitoAnestesia: boolean | null,
+    Gravidanza: boolean | null,
+    HaSoffertoSoffreMalattieInfettive: boolean | null,
+    IpersensibilitaVersoFarmaci: boolean | null,
+    MalattiePsichiche: boolean | null,
+    PatologieApparatoDigerente: boolean | null,
+    PatologieGenitoUrinarie: boolean | null,
+    PatologieOculari: boolean | null,
+    PatologieSangue: boolean | null,
+    PatologieSistemaNervoso: boolean | null,
+    Profilassi: boolean | null,
+    RicoveriOMalattie: boolean | null,
+    TerapiaAnticoagulanti: boolean | null,
+    Ulcere: boolean | null){
+        await db.cliente.update({
+            where: {
+                id: idPaziente
+            },
+            data: {
+                AffezioniCardiache,
+            AffezioniRenali,
+            Affezionireumatiche,
+            AlterazionePressioneSanguigna,
+            Altro,
+            AsmaOAltro,
+            AssumeFarmaci,
+            Bruxista,
+            Copnseguenze,
+            Diabete,
+            Ematomi,
+            Emorragie,
+            EsamiOTerapia,
+            FacilmenteInfezioni,
+            Fumatore,
+            GiaSubitoAnestesia,
+            Gravidanza,
+            HaSoffertoSoffreMalattieInfettive,
+            IpersensibilitaVersoFarmaci,
+            MalattiePsichiche,
+            PatologieApparatoDigerente,
+            PatologieGenitoUrinarie,
+            PatologieOculari,
+            PatologieSangue,
+            PatologieSistemaNervoso,
+            Profilassi,
+            RicoveriOMalattie,
+            TerapiaAnticoagulanti,
+            Ulcere,
+
+            }
+        })
+    }
