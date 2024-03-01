@@ -10,6 +10,15 @@ import { useStore } from "@/store/store";
 import { ColumnDef } from "@tanstack/react-table";
 import { useRouter } from "next/navigation";
 import { EModalType } from "@/enum/types";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { EStatusPrestazione } from "@/types";
+import { updateStatusPrestazione } from "@/actions/actions.clinica";
 
 export const dynamic = "force-dynamic";
 
@@ -50,7 +59,7 @@ export default function Page() {
     nome: string;
     categoria: string;
     dente: string;
-    stato: string;
+    status: string;
   };
 
   const columns: ColumnDef<TPrestazione>[] = [
@@ -69,6 +78,28 @@ export default function Page() {
     {
       accessorKey: "status",
       header: "Stato",
+      cell: ({ row, getValue }) => {
+        return (
+          <Select
+            onValueChange={(value) =>
+              updateStatusPrestazione(row.original.id, value)
+            }
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder={`${row.original.status}`} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Prescritto">Prescritto</SelectItem>
+              <SelectItem value="In corso">
+                {EStatusPrestazione["In corso"]}
+              </SelectItem>
+              <SelectItem value="Completato">
+                {EStatusPrestazione.Completato}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        );
+      },
     },
     {
       id: "actions",

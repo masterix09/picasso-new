@@ -565,3 +565,13 @@ export async function getImageByIdPiano (idPiano: string) {
        });
 }
 
+export async function updateStatusPrestazione (idPrestazione: string, status: string) {
+    await db.prestazione.update({
+        where: {
+            id: idPrestazione,
+        },
+        data: {
+            status
+        }
+    })
+}
