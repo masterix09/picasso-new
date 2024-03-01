@@ -73,7 +73,7 @@ const AltreInfoPaziente = ({
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="default">Default</SelectItem>
-                  <SelectItem value="gentile">Gntile</SelectItem>
+                  <SelectItem value="gentile">Gentile</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

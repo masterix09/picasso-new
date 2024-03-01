@@ -164,7 +164,7 @@ export async function createPagamento (data: string, importo: number, note: stri
     revalidatePath("/clinica/preventivo")
 }
 
-export async function createPaziente (nome: string, cognome: string, dataNascita: string, sesso: string, cf: string, straniero: boolean, luogoNascita: string, indirizzo: string, cap: string, citta: string, telefono: string, email: string, cellulare: string, motivo: string, listino: string, richiamo: string, professione: string) {
+export async function createPaziente (nome: string, cognome: string, dataNascita: string, sesso: string, cf: string, straniero: boolean, luogoNascita: string, indirizzo: string, cap: string, citta: string, telefono: string, email: string, cellulare: string, motivo: string, listino: string, richiamo: string, dataRichiamo: string, professione: string) {
     await db.cliente.create({
         data: {
             id: uuidv4(),
@@ -174,7 +174,7 @@ export async function createPaziente (nome: string, cognome: string, dataNascita
             codice_fiscale: cf,
             cognome,
             data_nascita: dataNascita,
-            data_richiamo: richiamo,
+            data_richiamo: dataRichiamo,
             email,
             indirizzo,
             Listino: listino,

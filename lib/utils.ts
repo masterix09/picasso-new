@@ -1,7 +1,8 @@
 import { addPrestazionePianoCura, createPaziente } from "@/actions/actions.clinica";
+import { ERichiamo } from "@/enum/types";
 import useGetSearchParams from "@/utils/useGetSearchParams";
 import { type ClassValue, clsx } from "clsx"
-import { format } from "date-fns";
+import { addMonths, addYears, format } from "date-fns";
 import { useSearchParams } from "next/navigation";
 import { twMerge } from "tailwind-merge"
 import { z } from "zod";
@@ -46,6 +47,28 @@ export function onSubmitCreatePaziente(values: z.infer<typeof formSchema >) {
 
   const data = format(new Date(dataNascita), "yyyy-MM-dd");
 
+  let dataRichiamo = "";
+    if (richiamo === "NonRichiamare") {
+      dataRichiamo = "";
+    } else if (richiamo === "DopoUnMese") {
+      dataRichiamo = format(addMonths(new Date(), 1), "yyyy-MM-dd")
+    } else if (richiamo === "Dopo2mesi") {
+      dataRichiamo = format(addMonths(new Date(), 2), "yyyy-MM-dd")
+    } else if (richiamo === "Dopo3mesi") {
+      dataRichiamo = format(addMonths(new Date(), 3), "yyyy-MM-dd")
+    } else if (richiamo === "Dopo4mesi") {
+      dataRichiamo = format(addMonths(new Date(), 4), "yyyy-MM-dd")
+    } else if (richiamo === "Dopo6mesi") {
+      dataRichiamo = format(addMonths(new Date(), 6), "yyyy-MM-dd")
+    } else if (richiamo === "Dopo8mesi") {
+      dataRichiamo = format(addMonths(new Date(), 8), "yyyy-MM-dd")
+    } else if (richiamo === "Dopo1anno") {
+      dataRichiamo = format(addYears(new Date(), 1), "yyyy-MM-dd")
+    }
+
+    console.log("richiamo => ", richiamo)
+    console.log("dataRichiamo => ", dataRichiamo)
+
   createPaziente(
     nome,
     cognome,
@@ -63,6 +86,7 @@ export function onSubmitCreatePaziente(values: z.infer<typeof formSchema >) {
     motivo,
     listino,
     richiamo,
+    dataRichiamo,
     professione
   );
 }

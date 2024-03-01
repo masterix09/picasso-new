@@ -82,14 +82,14 @@ export enum EBreakpoints {
   }
 
   export enum ERichiamo {
-    NonRichiamare = "NonRichiamare",
-    DopoUnMese = "DopoUnMese",
-    Dopo2mesi = "Dopo2mesi",
-    Dopo3mesi = "Dopo3mesi",
-    Dopo4mesi = "Dopo4mesi",
-    Dopo6mesi = "Dopo6mesi",
-    Dopo8mesi = "Dopo8mesi",
-    Dopo1anno = "Dopo1anno",
+    NonRichiamare = "Non Richiamare",
+    DopoUnMese = "Dopo Un Mese",
+    Dopo2mesi = "Dopo 2 mesi",
+    Dopo3mesi = "Dopo 3 mesi",
+    Dopo4mesi = "Dopo 4 mesi",
+    Dopo6mesi = "Dopo 6 mesi",
+    Dopo8mesi = "Dopo 8 mesi",
+    Dopo1anno = "Dopo 1 anno",
   }
 
   export type TUseFormReturnCreatePaziente = UseFormReturn<
