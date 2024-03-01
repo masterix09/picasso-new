@@ -266,6 +266,7 @@ export async function getPrestazioniByIdPiano (idPiano: string) {
           denteId: true,
           costoDefault: true,
           costoGentile: true,
+          status: true
         },
       });
 }
@@ -532,7 +533,13 @@ export async function getPianoCuraCreatedDate (idPianoCura: string) {
             id: idPianoCura,
         },
         select: {
-            createdAt: true
+            createdAt: true,
+            cliente: {
+                select: {
+                    nome: true,
+                    cognome: true
+                }
+            }
         }
     })
 }

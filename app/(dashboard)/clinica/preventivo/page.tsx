@@ -27,6 +27,10 @@ import {
   getPrestazioniByIdPiano,
 } from "@/actions/actions.clinica";
 import { format } from "date-fns";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import ResocontoPagamento from "@/components/dashboard/documenti/PDFDocument/ResocontoPagamento";
+import { Button } from "@/components/ui/button";
+import { EStatusPrestazione } from "@/types";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +40,10 @@ export default function Page() {
   const [pagamenti, setPagamenti] = useState<TPagamentiPreventivo[]>([]);
   const [pianoCreatedAt, setPianoCreatedAt] = useState<{
     createdAt: Date | null;
+    cliente: {
+      nome: string | null;
+      cognome: string | null;
+    };
   } | null>();
 
   useEffect(() => {
@@ -54,6 +62,30 @@ export default function Page() {
       data.map((item) => (costo = costo + (item.costoDefault ?? 0)));
     }
     return costo;
+  };
+
+  const calculateTotaleAcconti = () => {
+    let totaleAcconti = 0;
+    pagamenti.map((item) => {
+      return (totaleAcconti = totaleAcconti + Number(item.importo!));
+    });
+    return totaleAcconti;
+  };
+
+  const calculateTotaleEseguito = () => {
+    let totalEseguito = 0;
+    data.map((item) => {
+      if (item.status === "Eseguito") {
+        if (listino === EListino.DEFAULT) {
+          return (totalEseguito = totalEseguito + item.costoDefault!);
+        }
+        if (listino === EListino.GENTILE) {
+          return (totalEseguito = totalEseguito + item.costoGentile!);
+        }
+      }
+    });
+
+    return totalEseguito;
   };
 
   return (
@@ -89,13 +121,62 @@ export default function Page() {
         </h3>
       </div>
 
+      <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-4">
+        <div className="rounded-xl bg-green-400">
+          <h3 className="text-center font-semibold text-xl text-white w-full bg-green-600 p-3 rounded-t-xl">
+            Totale Acconti
+          </h3>
+          <h2 className="text-white font-bold text-2xl py-3 text-center">
+            {calculateTotaleAcconti()}€
+          </h2>
+        </div>
+        <div className="rounded-xl bg-yellow-400">
+          <h3 className="text-center font-semibold text-xl text-white w-full bg-yellow-600 p-3 rounded-t-xl">
+            Saldo Eseguito
+          </h3>
+          <h2 className="text-white font-bold text-2xl py-3 text-center">
+            {calculateTotaleEseguito()}€
+          </h2>
+        </div>
+        <div className="rounded-xl bg-red-400">
+          <h3 className="text-center font-semibold text-xl text-white w-full bg-red-600 p-3 rounded-t-xl">
+            Saldo su Totale
+          </h3>
+          <h2 className="text-white font-bold text-2xl py-3 text-center">
+            {calculateTotale() - calculateTotaleAcconti()}€
+          </h2>
+        </div>
+      </div>
+
       <div className="w-full rounded-lg p-4">
         <div className="w-full flex justify-between items-center">
           <h3 className="font-bold my-3">Pagamenti e acconti</h3>
-          <ButtonModal
-            type={EModalType.CREATE_PAGAMENTO}
-            value="Crea pagamento"
-          />
+          <div className="flex flex-col md:flex-row gap-y-4 md:gap-x-4">
+            <ButtonModal
+              type={EModalType.CREATE_PAGAMENTO}
+              value="Crea pagamento"
+            />
+            <PDFDownloadLink
+              document={
+                <ResocontoPagamento
+                  prestazioni={data}
+                  totale={calculateTotale()}
+                  pagamenti={pagamenti}
+                  totaleAcconti={calculateTotaleAcconti()}
+                  pianoCuraCreationDate={format(
+                    pianoCreatedAt?.createdAt ?? new Date(),
+                    "dd/MM/yyyy"
+                  )}
+                  totaleEseguito={calculateTotaleEseguito()}
+                  saldo={calculateTotale() - calculateTotaleAcconti()}
+                  listino={listino}
+                />
+              }
+              fileName={`${pianoCreatedAt?.cliente.cognome}_${pianoCreatedAt?.cliente.nome}_Resoconto_Pagamento`}
+            >
+              <Button type="button">Stampa resoconto</Button>
+            </PDFDownloadLink>
+          </div>
         </div>
         <DataTable columns={columnsPagamenti} data={pagamenti} />
       </div>

@@ -9,6 +9,7 @@ import Paragraph from "../common/Paragraph";
 import { IPagamento, IPrestazione } from "@/types";
 import { EListino } from "@/enum/types";
 import { format } from "date-fns";
+import { TPagamentiPreventivo } from "@/app/(dashboard)/clinica/preventivo/columns";
 
 const styles = StyleSheet.create({
   page: {
@@ -79,9 +80,9 @@ const styles = StyleSheet.create({
 const ResocontoPagamento: FC<{
   prestazioni: IPrestazione[] | null | undefined;
   totale: number;
-  pagamenti: IPagamento[] | null | undefined;
+  pagamenti: TPagamentiPreventivo[] | null | undefined;
   totaleAcconti: number;
-  pianoCuraCreationDate: Date | null | undefined;
+  pianoCuraCreationDate: string;
   saldo: number;
   totaleEseguito: number;
   listino: EListino;
@@ -206,7 +207,7 @@ const ResocontoPagamento: FC<{
             </View>
             <View style={styles.riepilogoRow}>
               <View style={styles.riepilogoColSx}>
-                <Text>Totale eseguito</Text>
+                <Text>Totale Acconti</Text>
               </View>
               <View style={styles.riepilogoColDx}>
                 <Text>{totaleAcconti} €</Text>

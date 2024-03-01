@@ -11,6 +11,7 @@ export type TPrestazionePreventivo = {
   denteId: string | null;
   costoGentile: number | null;
   costoDefault: number | null;
+  status: string | null;
 };
 
 export type TPagamentiPreventivo = {
